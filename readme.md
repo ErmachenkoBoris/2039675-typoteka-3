@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 * Студент: [Boris Ermachenko](https://up.htmlacademy.ru/nodejs/3/user/2039675).
-* Наставник: `Неизвестно`.
+* Наставник: `Михаил Кислый`.
 
 ---
 
