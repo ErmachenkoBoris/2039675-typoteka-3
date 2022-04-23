@@ -16,14 +16,15 @@ const {
   MAX_COUNT
 } = require(`./mocks/mocks`);
 
-const fs = require(`fs`);
+const fs = require(`fs`).promises;
+const chalk = require(`chalk`);
 
 const getTitles = () => {
   return TITLES[getRandomInt(0, TITLES.length - 1)];
 };
 
 const getCategories = () => {
-  const countOfCATEGORIES = getRandomInt(0, CATEGORIES.length - 1);
+  const countOfCATEGORIES = getRandomInt(1, CATEGORIES.length - 1);
   return shuffle(CATEGORIES).slice(0, countOfCATEGORIES);
 };
 
@@ -62,7 +63,7 @@ const generatePublications = (count) => (
   })));
 
 
-const generateCommandMain = (args) => {
+const generateCommandMain = async (args) => {
   const [count] = args;
 
   let countPublication = Number.parseInt(count, 10) || DEFAULT_COUNT;
@@ -73,18 +74,18 @@ const generateCommandMain = (args) => {
 
   const content = JSON.stringify(generatePublications(countPublication));
 
-  fs.writeFile(FILE_NAME, content, (err) => {
-    if (err) {
-      return console.error(`Can't write data to file...`);
-    }
-
-    return console.info(`Operation success. File created.`);
-  });
+  try {
+    await fs.writeFile(FILE_NAME, content);
+    return console.info(chalk.green(`Operation success. File created.`));
+  } catch (err) {
+    console.log(err);
+    return console.error(chalk.red(`Can't write data to file...`));
+  }
 };
 
 module.exports = {
   name: `--generate`,
-  run(args) {
-    generateCommandMain(args);
+  async run(args) {
+    await generateCommandMain(args);
   }
 };
