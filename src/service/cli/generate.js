@@ -78,7 +78,7 @@ const generateCommandMain = async (args) => {
     await fs.writeFile(FILE_NAME, content);
     return console.info(chalk.green(`Operation success. File created.`));
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return console.error(chalk.red(`Can't write data to file...`));
   }
 };
