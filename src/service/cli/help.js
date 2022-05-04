@@ -12,5 +12,6 @@ module.exports = {
     console.info(chalk.gray(`--version:            выводит номер версии`));
     console.info(chalk.gray(`--help:               печатает этот текст`));
     console.info(chalk.gray(`--generate <count>    формирует файл mocks.json`));
+    console.info(chalk.gray(`--server <port>    запускает http server`));
   }
 };
